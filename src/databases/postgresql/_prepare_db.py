@@ -18,7 +18,7 @@ async def create_first_user():
         db_user = UserModel(
             username='user1',
             email='user1@example.com',
-            password='fake_hash_password'
+            password='123456789' + 'fake_hash'
         )
 
         session.add(db_user)

@@ -13,4 +13,4 @@ booking_router = APIRouter(
 async def booking_meeting_room(current_user: UserModel = Depends(get_current_user)):
     """Бронировать переговорную комнату"""
 
-    return current_user.username
+    return 0

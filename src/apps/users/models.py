@@ -14,4 +14,4 @@ class UserModel(Base):
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
 
     def __repr__(self) -> str:
-        return f'User(id={self.id!r}, username={self.username!r})'
+        return f'User({self.id=!r}, {self.username=}, {self.is_admin=})'
