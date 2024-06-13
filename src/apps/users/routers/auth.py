@@ -1,5 +1,8 @@
 from fastapi import APIRouter, Depends
-from fastapi.security import OAuth2PasswordRequestForm
+
+from src.apps.users.models import UserModel
+from src.apps.users.schemas import UserOutSchema
+from src.apps.users.services.auth import get_current_user
 
 auth_router = APIRouter(
     prefix='/auth',
@@ -7,10 +10,10 @@ auth_router = APIRouter(
 )
 
 
-@auth_router.post('/basic/')
+@auth_router.post('/basic/', response_model=UserOutSchema)
 async def login_basic(
-        form_data: OAuth2PasswordRequestForm = Depends(OAuth2PasswordRequestForm)
+        current_user: UserModel = Depends(get_current_user)
 ):
     """Авторизация по логину и паролю"""
 
-    return {'username': form_data.username, 'password': form_data.password}
+    return current_user
