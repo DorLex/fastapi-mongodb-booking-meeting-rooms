@@ -13,4 +13,4 @@ async def login_basic(
 ):
     """Авторизация по логину и паролю"""
 
-    return form_data.username
+    return {'username': form_data.username, 'password': form_data.password}
