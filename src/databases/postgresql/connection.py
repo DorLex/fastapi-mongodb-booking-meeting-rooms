@@ -4,7 +4,7 @@ from src.config import settings
 
 async_engine = create_async_engine(
     settings.postgresql_url,
-    echo=True
+    # echo=True
 )
 
 SessionLocal = async_sessionmaker(

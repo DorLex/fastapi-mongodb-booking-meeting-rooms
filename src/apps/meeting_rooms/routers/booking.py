@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 
+from src.apps.meeting_rooms.service import MeetingRoomService
 from src.apps.users.models import UserModel
 from src.apps.users.services.auth import get_current_user
 
@@ -12,5 +13,7 @@ booking_router = APIRouter(
 @booking_router.post('/')
 async def booking_meeting_room(current_user: UserModel = Depends(get_current_user)):
     """Бронировать переговорную комнату"""
+
+    service = MeetingRoomService()
 
     return 0

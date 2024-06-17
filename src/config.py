@@ -8,6 +8,9 @@ class Settings(BaseSettings):
     postgres_host: str
     postgres_port: int
 
+    mongo_host: str
+    mongo_port: int
+
     mode: str
 
     @property
@@ -20,6 +23,10 @@ class Settings(BaseSettings):
             f'{self.postgres_port}/'
             f'{self.postgres_db}'
         )
+
+    @property
+    def mongodb_url(self):
+        return f'mongodb://{self.mongo_host}:{self.mongo_port}'
 
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
 
