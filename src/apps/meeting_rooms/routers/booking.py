@@ -24,31 +24,7 @@ async def booking_meeting_room(
 ):
     """Бронировать переговорную комнату"""
 
-    # in_db = {
-    #     'booking_start_at': datetime(2024, 6, 17, 12, 0),
-    #     'booking_end_at': datetime(2024, 6, 17, 13, 0)
-    # }
-    #
-    # if in_db['booking_start_at'] == meeting_room.booking_start_at:
-    #     return 'Нашли, значит занято'
-    #
-    # elif (
-    #         in_db['booking_start_at'] > meeting_room.booking_start_at
-    #         and
-    #         in_db['booking_start_at'] < meeting_room.booking_end_at
-    # ):
-    #     return 'Нашли, значит занято'
-    #
-    # elif (
-    #         in_db['booking_start_at'] < meeting_room.booking_start_at
-    #         and
-    #         in_db['booking_end_at'] > meeting_room.booking_start_at
-    # ):
-    #     return 'Нашли, значит занято'
-
-    # return 'Не нашли, значит можно создавать новую запись'
-
     service = MeetingRoomService()
-    result: InsertOneResultSchema = await service.insert_one(meeting_room.model_dump())
+    booked_room: InsertOneResultSchema = await service.booking_room(meeting_room)
 
-    return result
+    return booked_room
