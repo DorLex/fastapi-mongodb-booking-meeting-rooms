@@ -7,7 +7,7 @@ from src.apps.meeting_rooms.schemas.rooms.base import MeetingRoomBaseSchema
 
 
 class MeetingRoomInSchema(MeetingRoomBaseSchema):
-    booking_start_at: datetime = Field(examples=['2024-06-17 12:30'])
+    booking_start_at: datetime = Field(examples=['2024-06-17 12:00'])
     booking_end_at: datetime = Field(examples=['2024-06-17 13:30'])
 
     @field_validator('booking_start_at', 'booking_end_at')
