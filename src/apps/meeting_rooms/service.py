@@ -13,7 +13,7 @@ class MeetingRoomService:
     def __init__(self):
         self._repository = MeetingRoomRepository()
 
-    async def booking_room(self, meeting_room: MeetingRoomInSchema) -> InsertOneResultSchema:
+    async def booking_room(self, owner_name: str, meeting_room: MeetingRoomInSchema) -> InsertOneResultSchema:
         free_slot_exist: bool = await self._repository.check_free_slot(meeting_room)
 
         if not free_slot_exist:
@@ -22,7 +22,7 @@ class MeetingRoomService:
                 'Это время занято!'
             )
 
-        booked_room: InsertOneResult = await self._repository.insert_one(meeting_room)
+        booked_room: InsertOneResult = await self._repository.insert_one(owner_name, meeting_room)
 
         return InsertOneResultSchema(
             inserted_id=str(booked_room.inserted_id),

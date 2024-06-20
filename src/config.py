@@ -10,6 +10,8 @@ class Settings(BaseSettings):
 
     mongo_host: str
     mongo_port: int
+    mongo_db_name: str
+    mongo_collection_name: str
 
     mode: str
 

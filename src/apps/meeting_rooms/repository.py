@@ -4,17 +4,21 @@ from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorDatabase, As
 from pymongo.results import InsertOneResult
 
 from src.apps.meeting_rooms.schemas.rooms.create import MeetingRoomInSchema
+from src.config import settings
 from src.databases.mongodb.connection import mongo_client
 
 
 class MeetingRoomRepository:
     def __init__(self):
         self.client: AsyncIOMotorClient = mongo_client
-        self.db: AsyncIOMotorDatabase = self.client.schedule
-        self.collection: AsyncIOMotorCollection = self.db.meeting_rooms
+        self.db: AsyncIOMotorDatabase = self.client[settings.mongo_db_name]
+        self.collection: AsyncIOMotorCollection = self.db[settings.mongo_collection_name]
 
-    async def insert_one(self, meeting_room: MeetingRoomInSchema) -> InsertOneResult:
-        return await self.collection.insert_one(meeting_room.model_dump())
+    async def insert_one(self, owner_name: str, meeting_room: MeetingRoomInSchema) -> InsertOneResult:
+        data: dict = meeting_room.model_dump()
+        data.update({'owner_name': owner_name})
+
+        return await self.collection.insert_one(data)
 
     async def find_one(self, filters: dict) -> dict:
         return await self.collection.find_one(filters)
