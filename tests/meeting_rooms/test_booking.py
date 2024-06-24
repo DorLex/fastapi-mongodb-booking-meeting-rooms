@@ -56,11 +56,6 @@ class TestBookingMeetingRooms:
         [
             {
                 'title': 'Главная',
-                'booking_start_at': '01:00 18.06.2024',  # неверный шаблон datetime
-                'booking_end_at': '02:00 18.06.2024'
-            },
-            {
-                'title': 'Главная',
                 'booking_start_at': '2024-06-18 01:07',  # неверный шаблон минут
                 'booking_end_at': '2024-06-20 02:15'
             },
@@ -83,6 +78,31 @@ class TestBookingMeetingRooms:
                 'title': 'Главная',
                 'booking_start_at': '2024-06-18 01:00',  # бронирование больше 24 часов
                 'booking_end_at': '2024-06-20 01:00'
+            },
+            {
+                'title': 'Главная',
+                'booking_start_at': '5',  # неверный шаблон datetime
+                'booking_end_at': '6'
+            },
+            {
+                'title': 'Главная',
+                'booking_start_at': '5.5',  # неверный шаблон datetime
+                'booking_end_at': '6.7'
+            },
+            {
+                'title': 'Главная',
+                'booking_start_at': '5',  # неверный шаблон datetime
+                'booking_end_at': '2024-06-17 01:00'
+            },
+            {
+                'title': 'Главная',
+                'booking_start_at': '2024-06-17 01:00',
+                'booking_end_at': '4.2'  # неверный шаблон datetime
+            },
+            {
+                'title': 'Главная',
+                'booking_start_at': '01:00 18.06.2024',  # неверный шаблон datetime
+                'booking_end_at': '02:00 18.06.2024'
             },
         ]
     )
