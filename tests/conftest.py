@@ -44,6 +44,10 @@ async def client(app: FastAPI) -> AsyncGenerator[AsyncClient, None]:
         yield async_client
 
 
+def get_auth_headers() -> dict:
+    return {'Authorization': 'Basic YWxleDoxMjM0NTY3ODk='}
+
+
 @pytest.fixture(scope='session')
 async def auth_headers() -> dict:
-    return {'Authorization': 'Basic YWxleDoxMjM0NTY3ODk='}
+    return get_auth_headers()
