@@ -10,6 +10,25 @@ class MeetingRoomInSchema(MeetingRoomBaseSchema):
     booking_start_at: datetime = Field(examples=['2024-06-17 12:00'])
     booking_end_at: datetime = Field(examples=['2024-06-17 13:30'])
 
+    @model_validator(mode='before')
+    @classmethod
+    def check_datetime_format(cls, data: dict) -> dict:
+        try:
+            int(float(data['booking_start_at']))
+        except ValueError:
+            pass
+        else:
+            raise ValueError('booking_start_at не может быть int либо float')
+
+        try:
+            int(float(data['booking_end_at']))
+        except ValueError:
+            pass
+        else:
+            raise ValueError('booking_end_at не может быть int либо float')
+
+        return data
+
     @field_validator('booking_start_at', 'booking_end_at')
     @classmethod
     def validate_minutes(cls, date_time: datetime) -> datetime:
