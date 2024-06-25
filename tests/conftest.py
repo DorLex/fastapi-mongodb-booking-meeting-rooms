@@ -38,7 +38,7 @@ def app() -> FastAPI:
     return get_app()
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 async def client(app: FastAPI) -> AsyncGenerator[AsyncClient, None]:
     async with AsyncClient(app=app, base_url='http://test') as async_client:
         yield async_client

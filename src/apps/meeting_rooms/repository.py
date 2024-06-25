@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorDatabase, AsyncIOMotorClient, AsyncIOMotorCursor
 from pymongo.results import InsertOneResult
 
@@ -20,6 +22,15 @@ class MeetingRoomRepository:
 
     async def find_one(self, filters: dict) -> dict:
         return await self.collection.find_one(filters)
+
+    async def find_by_datetime(self, start: datetime, end: datetime) -> list[dict]:
+        query = {
+            'booking_end_at': {'$gt': start},
+            'booking_start_at': {'$lte': end}
+        }
+        cursor: AsyncIOMotorCursor = self.collection.find(query)
+
+        return await cursor.to_list(length=100)
 
     async def check_free_slot(self, meeting_room: MeetingRoomInSchema) -> bool:
         query = {

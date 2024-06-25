@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from pymongo.results import InsertOneResult
 from starlette import status
 
 from src.apps.meeting_rooms.schemas.rooms.create import MeetingRoomInSchema
@@ -21,6 +22,6 @@ async def booking_meeting_room(
     """Бронировать переговорную комнату"""
 
     service = MeetingRoomService()
-    booked_room: InsertOneResultSchema = await service.booking_room(current_user.username, meeting_room)
+    booked_room: InsertOneResult = await service.booking_room(current_user.username, meeting_room)
 
     return booked_room
