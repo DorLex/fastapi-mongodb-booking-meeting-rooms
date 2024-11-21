@@ -8,13 +8,13 @@ from src.apps.users.models import UserModel
 from src.apps.users.services.auth import get_current_user
 from src.common.schemas.insert_one_result import InsertOneResultSchema
 
-booking_router = APIRouter(
+router = APIRouter(
     prefix='/booking',
     tags=['Booking meeting rooms']
 )
 
 
-@booking_router.post(
+@router.post(
     '',
     status_code=status.HTTP_201_CREATED,
     response_model=InsertOneResultSchema

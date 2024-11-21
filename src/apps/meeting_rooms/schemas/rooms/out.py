@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from pydantic import Field, model_validator
+from bson import ObjectId
+from pydantic import Field, model_validator, field_validator
 
 from src.apps.meeting_rooms.schemas.rooms.base import MeetingRoomBaseSchema
 
@@ -11,8 +12,7 @@ class MeetingRoomOutSchema(MeetingRoomBaseSchema):
     booking_end_at: datetime
     oid: str = Field(validation_alias='_id')
 
-    @model_validator(mode='before')
+    @field_validator('oid', mode='before')
     @classmethod
-    def check_datetime_format(cls, data: dict) -> dict:
-        data['_id'] = str(data['_id'])
-        return data
+    def oid_format(cls, value: ObjectId) -> str:
+        return str(value)

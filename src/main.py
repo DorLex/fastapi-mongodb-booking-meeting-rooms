@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from src.apps.meeting_rooms.routers.local_router import meeting_rooms_router
-from src.apps.users.routers.local_router import users_router
+from src.apps.meeting_rooms.routers import meeting_rooms_router
+from src.apps.users.routers import users_router
 
 app = FastAPI(
     title='Booking Meeting Rooms',
