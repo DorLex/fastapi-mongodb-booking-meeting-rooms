@@ -14,7 +14,11 @@ booking_router = APIRouter(
 )
 
 
-@booking_router.post('/', status_code=status.HTTP_201_CREATED, response_model=InsertOneResultSchema)
+@booking_router.post(
+    '',
+    status_code=status.HTTP_201_CREATED,
+    response_model=InsertOneResultSchema
+)
 async def booking_meeting_room(
         meeting_room: MeetingRoomInSchema,
         current_user: UserModel = Depends(get_current_user)

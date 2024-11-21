@@ -11,7 +11,7 @@ schedule_router = APIRouter(
 )
 
 
-@schedule_router.get('/', response_model=list[MeetingRoomOutSchema])
+@schedule_router.get('', response_model=list[MeetingRoomOutSchema])
 async def show_meeting_rooms_schedule(
         start: datetime = Query(example='2024-06-17 00:00'),
         end: datetime = Query(example='2024-06-18 00:00')

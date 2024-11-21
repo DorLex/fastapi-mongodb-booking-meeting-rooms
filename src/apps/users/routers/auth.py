@@ -10,7 +10,7 @@ auth_router = APIRouter(
 )
 
 
-@auth_router.post('/basic/', response_model=UserOutSchema)
+@auth_router.post('/basic', response_model=UserOutSchema)
 async def login_basic(
         current_user: UserModel = Depends(get_current_user)
 ):

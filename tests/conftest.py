@@ -21,12 +21,10 @@ def event_loop():
 
 
 @pytest.fixture(scope='session', autouse=True)
-async def prepare(event_loop):
-    assert settings.mode == 'TEST'
-
-    yield
-
-    await MeetingRoomRepository().collection.delete_many({})
+async def prepare(event_loop) -> None:
+    if settings.mode == 'TEST' and settings.mongo_db_name == 'test_schedule':
+        yield
+        await MeetingRoomRepository().collection.delete_many({})
 
 
 def get_app() -> FastAPI:
@@ -45,7 +43,7 @@ async def client(app: FastAPI) -> AsyncGenerator[AsyncClient, None]:
 
 
 def get_auth_headers() -> dict:
-    return {'Authorization': 'Basic YWxleDoxMjM0NTY3ODk='}
+    return {'Authorization': 'Basic dXNlcjE6MTIzNDU2Nzg5'}
 
 
 @pytest.fixture(scope='session')

@@ -1,15 +1,12 @@
-from pydantic import BaseModel, model_validator
-from pymongo.results import InsertOneResult
+from bson import ObjectId
+from pydantic import BaseModel, field_validator
 
 
 class InsertOneResultSchema(BaseModel):
     inserted_id: str
     acknowledged: bool
 
-    @model_validator(mode='before')
+    @field_validator('inserted_id', mode='before')
     @classmethod
-    def check_datetime_format(cls, data: InsertOneResult) -> InsertOneResult:
-        return InsertOneResult(
-            inserted_id=str(data.inserted_id),
-            acknowledged=data.acknowledged
-        )
+    def oid_format(cls, value: ObjectId) -> str:
+        return str(value)
