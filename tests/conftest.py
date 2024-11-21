@@ -25,6 +25,10 @@ async def prepare(event_loop) -> None:
     if settings.mode == 'TEST' and settings.mongo_db_name == 'test_schedule':
         yield
         await MeetingRoomRepository().collection.delete_many({})
+    else:
+        raise ValueError(
+            f'{(settings.mode == 'TEST')=}, {(settings.mongo_db_name == 'test_schedule')=}'
+        )
 
 
 def get_app() -> FastAPI:
